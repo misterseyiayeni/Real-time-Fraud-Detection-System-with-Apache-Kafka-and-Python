@@ -1,0 +1,3 @@
+curl -X POST -H "Content-Type: application/json" --data @C:\sink-connectors\sink_connector_fraud.json http://localhost:8083/connectors
+
+curl -X POST -H "Content-Type: application/json" --data @C:\sink-connectors\sink_connector_legit.json http://localhost:8083/connectors

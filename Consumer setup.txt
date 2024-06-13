@@ -1,0 +1,44 @@
+Main consumer for receiving dummy credit card transactions
+
+
+./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic transactions \
+            --partitions 1 \
+            --replication-factor 1
+
+
+./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic transactions \
+            --consumer-property auto.offset.reset=latest
+
+
+Consumers to be routed to based on conditions
+
+
+./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic legitimate-transactions \
+            --partitions 1 \
+            --replication-factor 1
+
+./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic fraud-alerts \
+            --partitions 1 \
+            --replication-factor 1
+
+
+./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic legitimate-transactions \
+            --consumer-property auto.offset.reset=latest
+
+./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic fraud-alerts \
+            --consumer-property auto.offset.reset=latest
